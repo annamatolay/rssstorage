@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Dashboard</title>
-</head>
+<head th:replace="fragments/header :: header"></head>
 <body>
-Now is: <b th:text="${execInfo.now.time}"></b>
+<div> <i th:text="${execInfo.now.time}"></i></div>
+<div class="col-md-6 col-md-offset-3 col-sm-12">
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="url"
+                       name="rssfeed"
+                       class="form-control"
+                       id="rssfeedInput"
+                       placeholder="Rss feed link place..."
+                       required="required"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="reset" value="reset">reset</button>
+                    <button class="btn btn-primary" type="submit" value="submit">submit</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
