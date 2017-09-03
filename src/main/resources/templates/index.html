@@ -22,9 +22,8 @@
     </form>
 </div>
 
-<div th:unless="${#lists.isEmpty(feeds)}" class="table-responsive" style="margin: auto">
-    <table class="table table-bordered table-hover table-condensed" style="word-wrap: break-word"
-           th:each="feed : ${feeds}">
+<div th:unless="${#lists.isEmpty(feeds)}" style="margin-left: 7%">
+    <table class="table table-bordered table-hover table-condensed" th:each="feed : ${feeds}" style="display: inline-block;width:30%" id="feed-table">
         <thead><tr>
             <td th:text="${feed.getTitle()}"></td>
         </tr></thead>
@@ -35,7 +34,6 @@
         </tbody>
     </table>
 </div>
-
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
