@@ -1,5 +1,6 @@
 package com.matolaypal.service;
 
+import com.matolaypal.model.RssFeed;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
@@ -16,48 +17,33 @@ import java.util.List;
 @Service
 public class RssService {
 
-//    private String feedUrl;
-    private String channelTitle;
-
-//    public String getFeedUrl() {
-//        return feedUrl;
-//    }
-
-//    public void setFeedUrl(String feedUrl) {
-//        this.feedUrl = feedUrl;
-//    }
-
-    public String getChannelTitle() {
-        return channelTitle;
-    }
-
     /**
      * @return items with item(title, link)
      * @throws IllegalAccessException
      */
-    public List<List<String>> read(String feedUrl) throws IllegalAccessException {
+    public RssFeed read(String feedUrl) throws IllegalAccessException {
+        RssFeed rssFeed = new RssFeed();
         List<List<String>> items = new ArrayList<>();
         try {
             URL url = new URL(feedUrl);
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(url));
-//            System.out.println(feed.getTitle());
-            this.channelTitle = feed.getTitle();
+            rssFeed.setTitle(feed.getTitle());
             List<SyndEntry> entries = feed.getEntries();
-            if (entries.size() > 0) {
-                for (SyndEntry entry : entries) {
-                    List<String> item = new ArrayList<>();
-                    item.add(entry.getTitle());
-                    item.add(entry.getLink());
-//                    System.out.println(item);
-                    items.add(item);
-                }
+            if (entries.size() < 1) {
+                return null;
             }
+            for (SyndEntry entry : entries) {
+                List<String> item = new ArrayList<>();
+                item.add(entry.getTitle());
+                item.add(entry.getLink());
+                items.add(item);
+            }
+            rssFeed.setItems(items);
         }
         catch (Exception e) {
            e.printStackTrace();
         }
-//        System.out.println("****\n"+items);
-        return items;
+        return rssFeed;
     }
 }

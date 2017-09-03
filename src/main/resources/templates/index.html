@@ -22,13 +22,14 @@
     </form>
 </div>
 
-<div th:unless="${#lists.isEmpty(items)}" class="container-fluid table-responsive" style="margin: auto">
-    <table class="table table-bordered table-hover table-condensed" style="word-wrap: break-word">
+<div th:unless="${#lists.isEmpty(feeds)}" class="table-responsive" style="margin: auto">
+    <table class="table table-bordered table-hover table-condensed" style="word-wrap: break-word"
+           th:each="feed : ${feeds}">
         <thead><tr>
-            <td th:text="${title}"></td>
+            <td th:text="${feed.getTitle()}"></td>
         </tr></thead>
         <tbody>
-        <tr th:each="item : ${items}">
+        <tr th:each="item : ${feed.getItems()}">
             <td><a th:text="${item.get(0)}" th:href="${item.get(1)}" target="_blank"></a></td>
         </tr>
         </tbody>
