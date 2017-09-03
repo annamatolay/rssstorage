@@ -30,16 +30,10 @@ public class MainController {
 
     @PostMapping("/")
     public ModelAndView postIndex(@RequestParam("rssfeed")String link) {
-//        http://www.androidauthority.com/feed/
-//        System.out.println(rssService.getFeed(link));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-        rssService.setFeedUrl(link);
         try {
-            List items = rssService.read();
-//            if(items.size()<1) {
-//                System.out.println("return");
-//                return modelAndView;
+            List items = rssService.read(link);
             System.out.println(items);
             modelAndView.addObject("items", items);
             System.out.println(rssService.getChannelTitle());

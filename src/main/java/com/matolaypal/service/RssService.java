@@ -16,16 +16,16 @@ import java.util.List;
 @Service
 public class RssService {
 
-    private String feedUrl;
+//    private String feedUrl;
     private String channelTitle;
 
-    public String getFeedUrl() {
-        return feedUrl;
-    }
+//    public String getFeedUrl() {
+//        return feedUrl;
+//    }
 
-    public void setFeedUrl(String feedUrl) {
-        this.feedUrl = feedUrl;
-    }
+//    public void setFeedUrl(String feedUrl) {
+//        this.feedUrl = feedUrl;
+//    }
 
     public String getChannelTitle() {
         return channelTitle;
@@ -35,9 +35,7 @@ public class RssService {
      * @return items with item(title, link)
      * @throws IllegalAccessException
      */
-    public List<List<String>> read() throws IllegalAccessException {
-        if (feedUrl==null)
-            throw new IllegalAccessException("Feed url is null!");
+    public List<List<String>> read(String feedUrl) throws IllegalAccessException {
         List<List<String>> items = new ArrayList<>();
         try {
             URL url = new URL(feedUrl);
